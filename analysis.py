@@ -135,26 +135,40 @@ for i in columns_to_be_kept:  #40 columns to be kept
 
 #now we have 37 variables
 
+ 
+#Label encoding for the categorical features
+
+df['MARITALSTATUS'].unique()
+df['EDUCATION'].unique()
+df['GENDER'].unique()
+df['last_prod_enq2'].unique()
+df['first_prod_enq2'].unique()
 
 
 
+#LABEL ENCODE : EDUCATION
+
+#Ordinal feature---education
+#SSC               :1  
+#12th              :2  
+#Graduate          :3  
+#Under Graduate    :3  
+#Post Graduate     :4 
+#Others            :1   has to be verified by the business end user
+#Professional      :3
 
 
+df.loc[df['EDUCATION'] == 'SSC', ['EDUCATION']]                = 1
+df.loc[df['EDUCATION'] == '12TH', ['EDUCATION']]               = 2
+df.loc[df['EDUCATION'] == 'GRADUATE', ['EDUCATION']]           = 3
+df.loc[df['EDUCATION'] == 'UNDER GRADUATE', ['EDUCATION']]     = 3
+df.loc[df['EDUCATION'] == 'POST-GRADUATE', ['EDUCATION']]      = 4
+df.loc[df['EDUCATION'] == 'OTHERS', ['EDUCATION']]             = 1
+df.loc[df['EDUCATION'] == 'PROFESSIONAL', ['EDUCATION']]       = 3
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+df['EDUCATION'].value_counts()
+df['EDUCATION'] = df['EDUCATION'].astype(int)
+df.info()
 
 
 
