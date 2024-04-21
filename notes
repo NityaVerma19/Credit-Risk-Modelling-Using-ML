@@ -1,0 +1,290 @@
+WITH RESPECT TO THE BANK
+Asset -
+Housing Loan
+Personal Loan
+Group Loan
+Education Loan
+Credit Card
+
+
+Liability:
+Current Account
+Savings Account
+(CASA)
+
+Fixed Account
+Recurrent Account
+(Term deposit)
+
+IMPORTANT
+NPA:Non-Performing Asset
+A loan that is defaulted.
+1) Disbursed Amount-  Loan amount given to a customer. Example: agar kisi customer ko
+   1 Lakh rupay lend kiya toh 1 lakh would be the disbursed amount
+
+2)OSP- Outstanding Principle
+    Example: Agar bank se loan liya 1 lAKH ka so
+    1 lakh ka loan
+    8000 ka EMI, and 40000 pay kiya
+    then the remaining is the OSP
+    osp = 1,00,000 - 40000 = 60000
+    jaise jaise emi pay karenge waise waise OSP kam ho jayega
+    NOTE: OSP should be 0 if the loan is paid in full. So it can be used as a parameter to check whether the loan is paid or not
+
+
+3)DPD- Days Past Due: jab bhi due date hai usse kitna late pay kiya
+Example: Agar
+due date =  17th April
+EMI paid on : 20th April
+DPD = 2 days
+
+NOTE: Ideally, DPD should be 0. If it is not 0 then it means ki customer ne EMI pay karne skip kiya hai
+
+"Defaulted" if DPD > 0
+
+
+4)PAR - Portfolio At Risk
+
+OSP when DPD > 0
+Example:
+OSP = 60000 (Remaining amount left to pay)
+DPD > 0
+then PAR
+
+
+5) NPA - a loan account when DPD > 90
+Ideally, a bank's NPA should be LOW
+
+CREDIT RISK TYPES IN BANKING
+
+DPD = 0:  NDA (Non Delinquent Account) = No default account matlab timely payment of EMI
+
+DPD = 0-30 : SMA (Standard Monitoring Account)
+
+DPD = 31-60 : SMA2 (Standard Monitoring Account)
+
+DPD = 61- 90 : SMA3 (Standard Monitoring Account)
+
+DPD = 90 - 180 : NPA
+
+DPD = greater than 180: Written Off (Loan which is not present)
+The bank writes off the loan here, just to improve NPA figure.\
+NPA improve = Loan portfolio quality of the bank will be better = Market Sentiment will be good
+
+
+TWO TYPES OF NPA
+
+GNPA : Gross NPA (3% - 5%)
+3-5% OSP is a default
+Matlab agar 100 rupees lend kiya bank ne and 3- 5 rupees bank recover nahi kar paa raha
+toh GNPA is 3% to 5%
+
+
+NNPA : Net NPA(0.01% - 0.06%)
+Provisioning amount is subtracted
+
+Bank's quality assess karne ke liye look at the GNPA
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DATA
+
+Loans ko technical terms mein "Trade Lines" kehte hai
+so Home trade line means home loan
+
+
+Credit card enquiry - kitni baar credit card ke liye apply kiya hai
+agar customer ne 5 par enquiry ki hai matlab at least 4 baar iska credit card disapporvie hua hai
+but agar kisi customer ki number of enquiries 1 hai toh matlab usne 1 baar hi apply kiya
+
+
+
+Credit card utilization- Har credit card ka ekk proprtion hota hai, usme se aap kitna use kar paa rahe ho is known as credit card utilization
+For a bank, a person whose credit card utilization is less is better
+
+
+Approved Flag:  Priority level (target variablle)
+P1
+P2
+P3
+P4
+
+
+Loss account - jo pehle dataset mein the but ab nahi hai, maybe write off ho gaye ho
+
+
+Team structure for a data science project
+
+1)Data Science (ML, NLP, AI, model developers)
+2) MLOps (Deployment team, Azure, Cloud, AWS)
+3) Data Engineering (ETL) - data extractor
+4) Business Team (product, marketing, HR, PR, Ops) 0 jiske liye model bana rahe ho
+5) Distributor Team (sales)- bank branch
+
+-9999 is the null value
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                    DATA CLEANING AND FEATURE ENGINEERING
+
+A) DEALING WITH NULL VALUES
+
+1) impute - replacing with mean, median, mode
+2) remove - removing values. A way to play safe is to remove the whole column if it has a lot of null values
+ 
+             ----------------------------------------------------------------------------------------
+
+B) divide numerical and categorical variable and deal with them separately
+
+Categorical Variable: The first categorical variable is "MARITALSTATUS". So we can check whether marital status and our target variable (approved_flag)
+are associated using "Chi square test".
+
+ 
+We should perform label encoding only when data is ordinal in nature
+eg: less, medium, high
+
+In chi square test we make a contingency table
+
+UNDERSTANDING HYPOTHESIS TESTING
+
+1. H0 : null hypothesis : marital status and approved flag are "not associated"
+
+2. H1 : alternate hypothesis : both are associated
+
+3. alpha: significance/ strictness level- we will always assume. Kitna percent I can be wrong
+less risky projects: high alpha
+more risky projects like clinical tests, making medicines: low alpha
+
+4. Confidence Interval: Agar aap 5% risk lene ko taiyaar ho, toh your confidence is 95%. 
+1-alpha
+
+5. We try to calculate the evidence (P-value) against H0
+p value tells how much is your evidence against H0
+agar strong aaya toh matlab we can reject H0
+agar p value weak hai toh we will not reject H0. 
+P-values is calculated using tests: T-Test, Chi square, ANOVA
+
+6. Compare p-value with alpha
+if p-value<=alpha : reject H0
+   p- value > alpha : fail to reject H0 
+
+##INTERVIEW QUESTION
+Q1)why did we not write "accept H0"?
+Statistical tests assume that the null hypothesis is true. Starting with that assumption we can
+only reject or fail to reject the al
+The tests are performed on a sample of the population, so no matter how close the sample is to the population, we
+cannot totally accept the null hypothesis.As long as we use samples, there is always a possibility of us making errors
+
+
+Q2) What are these tests
+
+CHISQUARE: Category vs Category
+T-test : Category vs numerical (2 categories)
+ANOVA: Category vs Numerical
+
+Q3)Difference between ANOVA and CHISQUARE:
+When there are only two categories, then we will use t test, but if we have more than 
+2 cateogries then we will use ANOVA
+
+
+Q4) Multicollinearity or correlation?
+Multicollinearity -  calculate the predictability of each feature by other features
+kya hum baaki variables ka use karke ye wala variable predict kar dsakte hai?
+Agar multicollinearity hoga toh variables ko interpret karna mushkil hoga
+Example :  House Price = (3 x FLOOR AREA ) - 4 X (distance city center) + 7 x (Carpet Area)
+Now in this example, carpet area can be predicted using floor area, so it will be difficult r to interpret the variables
+in general, we might say ki "1 unit floor area badha do toh house price 3 unit badh jayega"
+par, because of multicollinearity, floor area badhaana ka kuchh affect carpet area par padega, and dono se house price par impact padega
+isliye multicollinearity is a HUGE issue
+
+VIF:
+Multicollinearity nikalane ke liye VIF nikaalte hai
+har feature ka VIF value nikalenge
+We will regress that variable with all the other variables and the find R^2 for each feature
+VIF = 1/ 1- R^2
+VIF ranges from 1 - inf
+
+1 : No multicollinearity
+1 - 5 : Low multicollinearity
+5 - 10: Moderate Multicollinearity
+above 10 : high multicollinearity
+
+In banking, VIF threshold is kept to be 6
+
+
+IMPORTANT
+VIF : Parallel vs sequential
+
+V1, V2, V3, V4, V5, V6
+
+Parallel: 
+Find vif of V1 with all variables, then find vif of V2 with all variables (including v1). 
+Sab variable ko sabke saath check karo
+
+Sequential:
+Find v1 with all. If vif of V1 is greater than 6, drop the variable
+variables left:  V2, V3, V4, V5, V6
+find V2 with all the remaining variables
+Then v3 with all the variables.If vif is greater than 6, drop v3
+
+
+Sequential is better than parallel because 
+let's say V3,V4,V5 are multicollinear. So in parallel we'll drop all three of them
+but if you think about it, in teeno mein se agar do drop kare toh chalega, we don't
+have to drop all three of them. Ekk rahega end mein toh woh to kisi se bhi predict nahi ho paayega
+because jinse woh predict ho sakta tha unko toh humne drop kar diya.
+so parallel mein we will lose one feature
+whereas in sequential we will keep one feature
+
+IMPORTANT
+Correlation is specific to strictly linear relationships between columns
+jaise convex functions (y= x^2) mein we cannot use correlation
+In convex functions, correlation gives misleading values
+
+
+NOTE: agar you don't have domain knowledge, so don't use correlations because you wouldn't know about the type of relationship, so use
+the safe step and use multicollinearity
+
+
+Q) why are we not using PCA?
+PCA se interpretability mushkil hoti hai features ki. We use it when we too many features
+Go with the traditional algo first and then try pca
+agar anova and chi square karke accuracy kam aaye, toh PCA use karke we can try feature Engineering
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
