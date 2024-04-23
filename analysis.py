@@ -205,16 +205,37 @@ for i, v in enumerate(['p1', 'p2', 'p3', 'p4']):
 
 
 
+#XG BOOST
+
+import xgboost as xgb
+from sklearn.preprocessing import LabelEncoder
+
+xgb_classifier = xgb.XGBClassifier(objective = "multi:softmax", num_class = 4)
+
+y = df_encoded['Approved_Flag']
+x = df_encoded.drop(['Approved_Flag'], axis = 1)
 
 
+label_encoder = LabelEncoder()
+y_encoded = label_encoder.fit_transform(y)
 
+x_train, x_test, y_train, y_test = train_test_split(x,y_encoded, test_size= 0.2, random_state= 42)
 
+xgb_classifier.fit(x_train, y_train)
 
+y_pred =  xgb_classifier.predict(x_test)
 
+accuracy = accuracy_score(y_test, y_pred)
+print()
+print(f'Accuracy : {accuracy}')
+precision, recall, f1_score, _ = precision_recall_fscore_support(y_test, y_pred)
 
-
-
-
+for i, v in enumerate(['p1', 'p2', 'p3', 'p4']):
+    print(f"Class {v}")
+    print(f"Precision: {precision[i]}")
+    print(f"Recall : {recall[i]}")
+    print(f"F1 Score: {f1_score[i]}")
+    print()
 
 
 

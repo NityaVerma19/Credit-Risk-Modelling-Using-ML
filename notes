@@ -255,9 +255,9 @@ agar anova and chi square karke accuracy kam aaye, toh PCA use karke we can try 
 
 F1 score = 2 x precision x recall/ (precision + recall)
 
-
-
-
+XG Boost - it is an ensemble technique wherein you create multiple decision trees (base learners).
+We consider each base learner in the final answer and multiply it  with a learning rate. 
+Base learners are taken in such a form that they correct the previous learners. It is an iterative process
 
 
 
