@@ -171,4 +171,19 @@ df['EDUCATION'] = df['EDUCATION'].astype(int)
 df.info()
 
 
+df_encoded = pd.get_dummies(df, columns = ['MARITALSTATUS', 'GENDER', 'last_prod_enq2', 'first_prod_enq2'])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
