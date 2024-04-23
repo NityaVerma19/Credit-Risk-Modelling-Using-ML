@@ -175,6 +175,43 @@ df_encoded = pd.get_dummies(df, columns = ['MARITALSTATUS', 'GENDER', 'last_prod
 
 
 
+#---------------------MACHINE LEARNING MODEL FITTING--------------------------------------------------#
+
+#RANDOM FOREST
+
+y = df_encoded['Approved_Flag']
+x = df_encoded.drop(['Approved_Flag'], axis = 1)
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size= 0.2, random_state= 42)
+
+rf_classifier = RandomForestClassifier(n_estimators= 200, random_state=42)
+
+rf_classifier.fit(x_train, y_train)
+
+y_pred = rf_classifier.predict(x_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+print()
+print(f'Accuracy : {accuracy}')
+precision, recall, f1_score, _ = precision_recall_fscore_support(y_test, y_pred)
+
+
+for i, v in enumerate(['p1', 'p2', 'p3', 'p4']):
+    print(f"Class {v}")
+    print(f"Precision: {precision[i]}")
+    print(f"Recall : {recall[i]}")
+    print(f"F1 Score: {f1_score[i]}")
+    print()
+
+
+
+
+
+
+
+
+
+
 
 
 

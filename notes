@@ -251,9 +251,9 @@ agar anova and chi square karke accuracy kam aaye, toh PCA use karke we can try 
 
 
 
+--------------------------------MACHINE LEARNING MODEL FITTING-------------------------------------------------------------------
 
-
-
+F1 score = 2 x precision x recall/ (precision + recall)
 
 
 
