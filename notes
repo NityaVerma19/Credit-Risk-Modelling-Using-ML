@@ -263,7 +263,7 @@ XGboost is better so we will finetune it
 HP TUNING
 Feature Engineering -- scaling, graphs
 
---------------------------------ACCURACY-------------------------------------------------------------------------
+-------------------------------------------ACCURACY-------------------------------------------------------------------------
 
 Accuracy - out of total how many are correctly predicted
 Recall - out of total values for a class, how many are correctly predicted
@@ -279,11 +279,31 @@ If the dataset is imbalanced, then recall and f1score should be considered.
 
 
 
+-----------------------------------------#HYPERPARAMETER TUNING---------------------------------------------------------------------
+
+Algorithms jo kuchh bhi learn karta hai woh sab data ke basis par seekhta hai. But, kuchh cheeze woh khud se seekhti hai and doesn't depend on the data
+
+Example:
+Decision tree - gini impurtiy(through the data)
+but Max depth - 5
+Min sample split - 2
+so these ae the hyperparameters of decision tree
+
+Motive of hyperparameretr - it decided how fast the Algorithm wants to finish (converge)
+
+
+Learning Rate (xgboost)  - reduces overfitting
+Xg boost mein multiple base learners banaate hai and pehle waale ke baad mein jo base learners hote hai
+usme learing rate multiply karte hai. Isiliye karte hai kyuki agar second wale ka answer le liye toh ho sakta hai woh ekdum se converge kar jaaye
+toh hum try karte hai ki hum sahi value tak pahuche from our first base model jo ki kaafi galat rehta hai kyuki woh simply ekk average
+rehta hai toh um try karte hai ki jo subsequent base models hai  unse hum thoda thoda improve kare
+Learning rate bada kardoge toh ekdum se values change ho jayengi and optimum point se aage nikal jayega
+Jab chhota rahega toh chote chhote steps loge
 
 
 
-
-
+colsample_bytrree - jo bhi base tree bana rahe hai usme kitna proportion of features le rahe hai
+n_estimators- number of base values
 
 
 

@@ -279,25 +279,94 @@ df_encoded['Approved_Flag'].value_counts()  #balanced
 #as approved flag is balanced, so we can focus on accuracy
 
 
+#------------------Hyperparameter tuning for XGBOOST---------------------------
 
 
+#Define the hyperparameter grid - 720 combinations
+
+param_grid = {
+    'colsample_bytree' : [0.1, 0.3, 0.5, 0.7, 0.9],   #har combination ke saath ekk xgboost ka model
+    'learning_rate' : [0.001, 0.01, 0.1, 1],
+    'max_depth' : [3,5,8,10],
+    'alpha' : [1, 10, 100],
+    'n_estimators' : [10, 50, 100]
+    }
+
+index = 0
+
+answer_grid = {                                 #har xgboost ke answer ekk dictionary mein 
+    'combination' :         [],            
+    'train_Accuracy' :      [],
+    'test_accuracy':        [],
+    'colsample_bytree' :    [],
+    'learning_rate':        [],
+    "max_depth":            [],
+    'alpha':                [],
+    'n_estimators':         []
+    }
+
+#Loop throught each combination of hyperparameters
+
+for colsample_bytree in param_grid['colsample_bytree']:
+    for learning_rate in param_grid['learning_rate']:
+        for max_depth in param_grid['max_depth']:
+            for alpha in param_grid['alpha']:
+                for n_estimators in param_grid['n_estimators']:
+                    
+                    index = index + 1
+                    #define the train XGBOOST model
+                    
+                    model = xgb.XGBClassifier(objective= "multi:softmax", 
+                                              num_class = 4,
+                                              colsample_bytree = colsample_bytree,
+                                              learning_rate = learning_rate,
+                                              max_depth = max_depth, 
+                                              alpha = alpha,
+                                              n_estimators = n_estimators)
+                    
+                    y = df_encoded['Approved_Flag']
+                    x = df_encoded.drop(['Approved_Flag'], axis = 1)
+                    
+                    label_encoder = LabelEncoder()
+                    y_encoded = label_encoder.fit_transform(y)
+                    
+                    x_train, x_test, y_train, y_teet = train_test_split(x, y_encoded, test_size= 0.2,random_state=2 )
+                    
+                    model.fit(x_train, y_train)
+                    
+                    
+                    #Predict on training and testing sets
+                    
+                    y_pred_train = model.predict(x_train)
+                    y_pred_test = model.predict(x_test)
+                    
+                    #Calculate train and test results
+                    
+                    train_accuracy = accuracy_score(y_train, y_pred_train)
+                    test_accuracy  = accuracy_score(y_test, y_pred_test)
+                    
+                    
+                    #Include into the lists
+                    answer_grid['combination'].append(index)
+                    answer_grid['train_Accuracy'].append(train_accuracy)
+                    answer_grid['test_accuracy'].append(test_accuracy)
+                    answer_grid['colsample_bytree'].append(colsample_bytree)
+                    answer_grid['learning_rate'].append(learning_rate)
+                    answer_grid['max_depth'].append(max_depth)
+                    answer_grid['alpha'].append(alpha)
+                    answer_grid['n_estimators'].append(n_estimators)
+                    
+                    
+                    #Print results for this combination
+                    
+                    print(f"Combination{index}")
+                    print(f"Colsample_bytree {colsample_bytree}, learning_rate : {learning_rate}, max_depth : {max_depth}, alpha : {alpha}, n_estimators : {n_estimators}")
+                    print(f"Train Accuracy : {train_accuracy : .2f}")
+                    print(f"Test Accuracy : {test_accuracy : .2f}")
+                    print("-" * 30)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#Drawback - Xgboost in itself is a heavy algo, so so many combinations lead to computational inefficiency
 
 
 
