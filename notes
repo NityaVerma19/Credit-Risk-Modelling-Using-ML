@@ -259,9 +259,15 @@ XG Boost - it is an ensemble technique wherein you create multiple decision tree
 We consider each base learner in the final answer and multiply it  with a learning rate. 
 Base learners are taken in such a form that they correct the previous learners. It is an iterative process
 
+XGboost is better so we will finetune it
+HP TUNING
+Feature Engineering -- scaling, graphs
 
+--------------------------------ACCURACY-------------------------------------------------------------------------
 
-
+Accuracy - out of total how many are correctly predicted
+Recall - out of total values for a class, how many are correctly predicted
+Precisiom - out of the total predicted value ofr a class, how many are correctly predicted
 
 
 

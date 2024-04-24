@@ -7,6 +7,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report, precision_recall_fscore_support
 import warnings
 import os
+import time
+
+print("program is running")
+print()
+start_time = time.time()
 
 a1 = pd.read_excel("C:/Users/DELL/OneDrive/Desktop/Desktop/College/DATA SCIENCE/PROJECTS/Credit Risk Modelling/DATA/case_study1.xlsx")
 a2 = pd.read_excel("C:/Users/DELL/OneDrive/Desktop/Desktop/College/DATA SCIENCE/PROJECTS/Credit Risk Modelling/DATA/case_study2.xlsx")
@@ -264,5 +269,45 @@ for i, v in enumerate(['p1', 'p2', 'p3', 'p4']):
     print(f"Recall : {recall[i]}")
     print(f"F1 Score: {f1_score[i]}")
     print()
+
+
+
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
