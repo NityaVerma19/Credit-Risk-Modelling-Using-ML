@@ -11,7 +11,7 @@ import time
 
 print("program is running")
 print()
-start_time = time.time()
+start_time = time.time() 
 
 a1 = pd.read_excel("C:/Users/DELL/OneDrive/Desktop/Desktop/College/DATA SCIENCE/PROJECTS/Credit Risk Modelling/DATA/case_study1.xlsx")
 a2 = pd.read_excel("C:/Users/DELL/OneDrive/Desktop/Desktop/College/DATA SCIENCE/PROJECTS/Credit Risk Modelling/DATA/case_study2.xlsx")
@@ -272,7 +272,13 @@ for i, v in enumerate(['p1', 'p2', 'p3', 'p4']):
 
 
 
-#
+#Checking whether P1, P2, P3, P4 is balanced or imbalanced
+
+df_encoded['Approved_Flag'].value_counts()  #balanced
+
+#as approved flag is balanced, so we can focus on accuracy
+
+
 
 
 

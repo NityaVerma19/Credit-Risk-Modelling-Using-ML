@@ -270,8 +270,12 @@ Recall - out of total values for a class, how many are correctly predicted
 Precisiom - out of the total predicted value ofr a class, how many are correctly predicted
 
 
+WHEN TO CHOODE WHICH MEASURE? - ACCURACY, RECALL, F1SCORE
 
 
+By looking at the imbalanced nature of the target variable, we get to decide the loss metric. 
+If the dataset is balanced, that is each class has equal count, then accuracy is the correct measure
+If the dataset is imbalanced, then recall and f1score should be considered.
 
 
 
