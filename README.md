@@ -5,5 +5,5 @@
 
 <div align="center" >
   <h2>Methodology</h2>
-  <img src="Resources/methodology.png" alt="sa"style="width:300px;height:500px;">
+  <img src="Resources/methodology.png" alt="method"style="width:300px;height:500px;">
 </div>
