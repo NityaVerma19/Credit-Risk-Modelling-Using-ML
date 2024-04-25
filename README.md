@@ -1,3 +1,4 @@
-<H1 align = "center">
-  Credit Risk Modelling
-</H1>
+<div align="center" >
+  <h1>Credit Risk Modelling</h1> 
+  <p>Determining the level of credit risk associated with extending credit to a borrower</p>
+</div>
