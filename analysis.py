@@ -370,10 +370,18 @@ for colsample_bytree in param_grid['colsample_bytree']:
 
 
 
+#-------------------------------------Finally fitting the model with the best parameters--------------------------------------------------
+model = xgb.XGBClassifier(objective= 'multi:softmax',
+                          num_class = 4, 
+                          colsample_bytree = 0,
+                          learning_rate = 1,
+                          max_depth = 3,
+                          alpha = 10,
+                          n_estimators = 100)
 
+model.fit(x_train, y_train)
 
-
-
+y_pred_unseen = model.predict(df_encoded)
 
 
 
