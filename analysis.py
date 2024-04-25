@@ -371,6 +371,29 @@ for colsample_bytree in param_grid['colsample_bytree']:
 
 
 #-------------------------------------Finally fitting the model with the best parameters--------------------------------------------------
+
+a3 = pd.read_excel("C:/Users/DELL/OneDrive/Desktop/Desktop/College/DATA SCIENCE/PROJECTS/Credit Risk Modelling/Unseen_Dataset.xlsx")
+a3
+cols_in_df = list(a3.columns)
+
+df_unseen = a3[cols_in_df]
+cols_in_df
+df.columns
+
+df_unseen.loc[df_unseen['EDUCATION'] == 'SSC', ['EDUCATION']]                = 1
+df_unseen.loc[df_unseen['EDUCATION'] == '12TH', ['EDUCATION']]               = 2
+df_unseen.loc[df_unseen['EDUCATION'] == 'GRADUATE', ['EDUCATION']]           = 3
+df_unseen.loc[df_unseen['EDUCATION'] == 'UNDER GRADUATE', ['EDUCATION']]     = 3
+df_unseen.loc[df_unseen['EDUCATION'] == 'POST-GRADUATE', ['EDUCATION']]      = 4
+df_unseen.loc[df_unseen['EDUCATION'] == 'OTHERS', ['EDUCATION']]             = 1
+df_unseen.loc[df_unseen['EDUCATION'] == 'PROFESSIONAL', ['EDUCATION']]       = 3
+
+df_unseen['EDUCATION'].value_counts()
+df_unseen['EDUCATION'] = df_unseen['EDUCATION'].astype(int)
+df_unseen.info()
+
+df_encoded_unseen = pd.get_dummies(df_unseen, columns =  ['MARITALSTATUS', 'GENDER', 'last_prod_enq2', 'first_prod_enq2'])
+
 model = xgb.XGBClassifier(objective= 'multi:softmax',
                           num_class = 4, 
                           colsample_bytree = 0,
@@ -381,11 +404,12 @@ model = xgb.XGBClassifier(objective= 'multi:softmax',
 
 model.fit(x_train, y_train)
 
-y_pred_unseen = model.predict(df_encoded)
+y_pred_unseen = model.predict(df_encoded_unseen)
+
+a3['Target_variable'] = y_pred_unseen
 
 
-
-
+a3.to_excel("Final predictions.xlsx", index = False)
 
 
 

@@ -281,6 +281,12 @@ If the dataset is imbalanced, then recall and f1score should be considered.
 
 -----------------------------------------#HYPERPARAMETER TUNING---------------------------------------------------------------------
 
+Three methods - 
+1) grid search - search all combinations
+2) random search - faster
+3)Bayesian- uses bayes theorem
+
+
 Algorithms jo kuchh bhi learn karta hai woh sab data ke basis par seekhta hai. But, kuchh cheeze woh khud se seekhti hai and doesn't depend on the data
 
 Example:
@@ -304,6 +310,47 @@ Jab chhota rahega toh chote chhote steps loge
 
 colsample_bytrree - jo bhi base tree bana rahe hai usme kitna proportion of features le rahe hai
 n_estimators- number of base values
+
+
+
+
+
+
+---------------------------------------UNDERFITTING & OVERFITTING-----------------------------------------------------------------------------------
+
+
+Originally, we train our model and then use it on x_test to get y_pred and then compare y_pred with y_test to check model accuracy
+
+in our case, we are running the model again on x_train and getting some results y1 and then we are comparing y1 with ytrain to check underfitting
+so the question is that how will this approach help us in checking underfitting?
+well obviously the model is expected to at least give correct results on the data it has trained
+unseen data par model chalaane ka kya fayda jab woh seen par hi nahi chal raha
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
